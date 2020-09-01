@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component,useEffect } from 'react';
 import Search from './search'
 import Recommend from './recommend'
 import ResultList from './resultList'
@@ -12,15 +12,21 @@ class Main extends Component {
 
     handleSearch = (searchText) => {
         console.log("Get search results: input is ", searchText)
-        const resultList = [
-            {'conceptId' : 1, 'conceptName' : 'mock concept 1', 'inSeed' : false},
-            {'conceptId' : 2, 'conceptName' : 'mock concept 2', 'inSeed' : false},
-            {'conceptId' : 3, 'conceptName' : 'mock concept 3', 'inSeed' : false},
-            {'conceptId' : 4, 'conceptName' : 'mock concept 4', 'inSeed' : false},
-        ]
-        // make sure the seed concepts flag is correct
-        const seedList = [...this.state.seedList] 
-        resultList.forEach(result => {
+        fetch('http://localhost:5000/getSearch',{
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              search_text: searchText,
+            })
+          })
+        .then(res => res.json())
+        .then((resultList) => {
+            const seedList = [...this.state.seedList] 
+            resultList.forEach(result => {
+            result.inSeed = false
             seedList.forEach(seed => {
                 if(result.conceptId === seed.conceptId){
                     result.inSeed = true
@@ -28,19 +34,27 @@ class Main extends Component {
             })
         })
         this.setState({resultList : resultList})
+        })
+        .catch(console.log)
     }
 
     handleGetRecommend = () =>{
-        console.log("Get recommend results: input is", this.state.seedList)
-        const resultList = [
-            {'conceptId' : 5, 'conceptName' : 'mock concept 5', 'inSeed' : false},
-            {'conceptId' : 6, 'conceptName' : 'mock concept 6', 'inSeed' : false},
-            {'conceptId' : 7, 'conceptName' : 'mock concept 7', 'inSeed' : false},
-            {'conceptId' : 8, 'conceptName' : 'mock concept 8', 'inSeed' : false},
-        ]
-        // make sure the seed concepts flag is correct
-        const seedList = [...this.state.seedList] 
-        resultList.forEach(result => {
+        console.log("Get recommend results:")
+        fetch('http://localhost:5000/getRecommend',{
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              seed_list: this.state.seedList,
+            })
+          })
+        .then(res => res.json())
+        .then((resultList) => {
+            const seedList = [...this.state.seedList] 
+            resultList.forEach(result => {
+            result.inSeed = false
             seedList.forEach(seed => {
                 if(result.conceptId === seed.conceptId){
                     result.inSeed = true
@@ -48,6 +62,8 @@ class Main extends Component {
             })
         })
         this.setState({resultList : resultList})
+        })
+        .catch(console.log)
     }
 
     handleToggleSeedInResults = (result) => {
@@ -80,7 +96,7 @@ class Main extends Component {
 
 
     handleRemoveSeedInSeeds = (seed) => {
-        console.log("Remove seed in seeds: input is", seed)
+        // console.log("Remove seed in seeds: input is", seed)
        // alternating seed list
        const seedList = [...this.state.seedList]
        const indexInSeeds = seedList.indexOf(seed)
@@ -106,7 +122,6 @@ class Main extends Component {
         console.log("Click page number in seeds: input is", pageNumber)
     }
 
-    handleToggleInSeed
     render() { 
         return ( 
             <React.Fragment>
