@@ -14,12 +14,14 @@ class Search extends Component {
 
     render() {
         return (
-            <div>
-                <div className="form-inline" >
+            <form className="justify-content-center">
+                <div className="text-center" >
                     <input className="form-control mr-sm-2" placeholder="Type your concept" aria-label="Search" onChange={this.handleChange}/>
-                    <label className="btn btn-outline-success my-2 my-sm-0" onClick={this.handleSubmit}>Search</label>
+                    </div>
+                <div className="text-center" >
+                    <label className="btn btn-outline-success mt-5" onClick={this.handleSubmit}>Search</label>
                 </div>
-            </div>
+            </form>
         );
     }
 }

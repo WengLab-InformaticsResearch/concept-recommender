@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Dropdown, Container} from 'react-bootstrap'
 
 class Recommend extends Component {
 
@@ -11,21 +12,33 @@ class Recommend extends Component {
 
     render() {
         return (
-                <div className="form-inline" >
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
-                        <label className="form-check-label" for="exampleRadios1">
-                            Embedding based on knowledge graph based 
-                        </label>
-                    </div>
-                    <div className="form-check">
-                        <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
-                        <label className="form-check-label" for="exampleRadios2">
-                            Embedding based on co-occurrence in EHR
-                        </label>
-                    </div>
-                    <label className="btn btn-outline-success my-2 my-sm-0" onClick={this.handleSubmit}>Recommend</label>
-                </div>
+
+                <Dropdown className='mb-5'>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        Generate Recommendation by
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#/action-1" onClick={this.handleSubmit}>knowledge graph</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2" onClick={this.handleSubmit}>co-occurrence in EHR</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={this.handleSubmit}>Something else</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            
+                // <div className="form-inline" >
+                //     <div className="form-check">
+                //         <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked />
+                //         <label className="form-check-label" for="exampleRadios1">
+                //             Embedding based on  based 
+                //         </label>
+                //     </div>
+                //     <div className="form-check">
+                //         <input className="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" />
+                //         <label className="form-check-label" for="exampleRadios2">
+                //             Embedding based on 
+                //         </label>
+                //     </div>
+                //     <label className="btn btn-outline-success my-2 my-sm-0" onClick={this.handleSubmit}>Recommend</label>
+                // </div>
 
         );
     }

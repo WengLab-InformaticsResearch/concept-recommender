@@ -7,7 +7,6 @@ class ResultList extends Component {
 
         return (
             <div>
-                <p>This is the result list.</p>
                 <table className="table">
                     <thead>
                         <tr>
