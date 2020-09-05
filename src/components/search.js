@@ -19,7 +19,7 @@ class Search extends Component {
                     <input className="form-control mr-sm-2" placeholder="Type your concept" aria-label="Search" onChange={this.handleChange}/>
                     </div>
                 <div className="text-center" >
-                    <label className="btn btn-outline-success mt-5" onClick={this.handleSubmit}>Search</label>
+                    <label className="btn btn-outline-success mt-2" onClick={this.handleSubmit}>Search</label>
                 </div>
             </form>
         );
