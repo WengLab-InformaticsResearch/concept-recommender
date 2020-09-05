@@ -1,8 +1,10 @@
 ### install nodejs, npm, python and require (sudo required, already installed on the server).
-`sudo curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -`
-`sudo apt-get install nodejs`
-`node --version`
-`npm --version`
+```
+sudo curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -`
+sudo apt-get install nodejs
+node --version
+npm --version
+```
 
 ### install react and python requirements.
 ```
