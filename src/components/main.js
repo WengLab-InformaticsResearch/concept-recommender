@@ -3,14 +3,22 @@ import Search from './search'
 import ResultList from './resultList'
 import SeedList from './seedList'
 import {Card, Alert} from 'react-bootstrap'
+import Loader from 'react-loader-spinner'
 
 class Main extends Component {
-    state = {
-        resultList: [],
-        seedList: []
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            resultList: [],
+            seedList: []
+        }
     }
 
+
     handleSearch = (searchText) => {
+        this.setState({ loading: true })
         console.log("Get search results: input is ", searchText)
         fetch('http://localhost:5000/getSearch', {
             method: 'POST',
@@ -33,12 +41,13 @@ class Main extends Component {
                         }
                     })
                 })
-                this.setState({ resultList: resultList })
+                this.setState({ resultList: resultList, loading: false })
             })
             .catch(console.log)
     }
 
     handleGetRecommend = () => {
+        this.setState({ loading: true })
         console.log("Get recommend results:")
         fetch('http://localhost:5000/getRecommend', {
             method: 'POST',
@@ -61,7 +70,7 @@ class Main extends Component {
                         }
                     })
                 })
-                this.setState({ resultList: resultList })
+                this.setState({ resultList: resultList,loading: false })
             })
             .catch(console.log)
     }
@@ -134,8 +143,7 @@ class Main extends Component {
                 <Card className="text-center">
                     <Card.Header>Step 2: Select relevant concepts</Card.Header>
                     <Card.Body>
-                    
-                        <ResultList resultList={this.state.resultList} onToggleSeedInResults={this.handleToggleSeedInResults} />
+                        {this.state.loading ? <Loader /> : <ResultList resultList={this.state.resultList} onToggleSeedInResults={this.handleToggleSeedInResults} />}                    
                     </Card.Body>
                 </Card>
                 <Card className="text-center">

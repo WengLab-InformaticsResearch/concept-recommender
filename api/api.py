@@ -1,6 +1,7 @@
 import time
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from lib.search import search_concept
 
 app = Flask(__name__)
 CORS(app)
@@ -22,9 +23,5 @@ def get_recommend_concept():
 @app.route('/getSearch',methods=['POST'])
 def get_search_concept():
     search_text = request.json['search_text']
-    search_concept_list =[
-        {'conceptId' : 1, 'conceptName' : 'mock concept 1'},
-        {'conceptId' : 2, 'conceptName' : 'mock concept 2'},
-        {'conceptId' : 3, 'conceptName' : 'mock concept 3'},
-        {'conceptId' : 4, 'conceptName' : 'mock concept 4'}]
+    search_concept_list = search_concept(search_text)
     return jsonify(search_concept_list)
