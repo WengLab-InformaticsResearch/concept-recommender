@@ -4,6 +4,7 @@ import ResultList from './resultList'
 import SeedList from './seedList'
 import {Card, Alert} from 'react-bootstrap'
 import Loader from 'react-loader-spinner'
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
 
 class Main extends Component {
 
@@ -46,21 +47,27 @@ class Main extends Component {
             .catch(console.log)
     }
 
-    handleGetRecommend = () => {
+    handleGetRecommend = (methods) => {
         this.setState({ loading: true })
         console.log("Get recommend results:")
         fetch('http://localhost:5000/getRecommend', {
             method: 'POST',
             headers: {
+                'Access-Control-Allow-Origin' : '*',
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 seed_list: this.state.seedList,
+                methods: methods
             })
         })
             .then(res => res.json())
             .then((resultList) => {
+                if(resultList.length == 0){
+                    // nothing in the concept list
+                    alert("No seed concept in the dictionary.")
+                }
                 const seedList = [...this.state.seedList]
                 resultList.forEach(result => {
                     result.inSeed = false
@@ -103,6 +110,11 @@ class Main extends Component {
         this.setState({ resultList: resultList, seedList: seedList })
     }
 
+    // handleToggleAllInResultList = (addAll) => {
+        
+        
+    // }
+
 
     handleRemoveSeedInSeeds = (seed) => {
         // console.log("Remove seed in seeds: input is", seed)
@@ -143,7 +155,7 @@ class Main extends Component {
                 <Card className="text-center">
                     <Card.Header>Step 2: Select relevant concepts</Card.Header>
                     <Card.Body>
-                        {this.state.loading ? <Loader /> : <ResultList resultList={this.state.resultList} onToggleSeedInResults={this.handleToggleSeedInResults} />}                    
+                        {this.state.loading ? <Loader /> : <ResultList resultList={this.state.resultList} onToggleSeedInResults={this.handleToggleSeedInResults} onToggleAllInResultList={this.handleToggleAllInResultList} />}                    
                     </Card.Body>
                 </Card>
                 <Card className="text-center">

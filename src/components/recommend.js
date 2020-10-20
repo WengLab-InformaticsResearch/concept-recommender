@@ -3,13 +3,6 @@ import {Dropdown, Container} from 'react-bootstrap'
 
 class Recommend extends Component {
 
-    state = {value : 'kg'}
-
-    handleSubmit = (event) =>{
-        event.preventDefault()
-        this.props.onRecommend(this.state.value)
-    }
-
     render() {
         return (
 
@@ -18,9 +11,11 @@ class Recommend extends Component {
                         Generate Recommendation by
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
-                        <Dropdown.Item href="#/action-1" onClick={this.handleSubmit}>knowledge graph</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2" onClick={this.handleSubmit}>co-occurrence in EHR</Dropdown.Item>
-                        <Dropdown.Item href="#/action-3" onClick={this.handleSubmit}>Something else</Dropdown.Item>
+                        <Dropdown.Item href="#/action-1" onClick={()=>this.props.onRecommend('line')} >LINE</Dropdown.Item>
+                        <Dropdown.Item href="#/action-2" onClick={()=>this.props.onRecommend('node2vec')}>node2vec</Dropdown.Item>
+                        <Dropdown.Item href="#/action-3" onClick={()=>this.props.onRecommend('svd')} >SVD</Dropdown.Item>
+                        <Dropdown.Item href="#/action-4" onClick={()=>this.props.onRecommend('glove')} >GloVe</Dropdown.Item>
+                        <Dropdown.Item href="#/action-5" onClick={()=>this.props.onRecommend('skipgram')} >Skip-Gram</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             
