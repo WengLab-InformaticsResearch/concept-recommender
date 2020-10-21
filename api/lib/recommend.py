@@ -15,15 +15,17 @@ def elemwise_cossim(vec, matrix):
     sim_array = np.nan_to_num(sim_array)
     return sim_array
 
-
-def recommend_concept(seed_concept_list,k,summed_vec,mce_matrix,id2concept,concept2id):
+def recommend_concept(seed_concept_list, k, mce_matrix, id2concept, concept2id):
     concept_list = []
     i_in_dict = 0
+    summed_vec = np.zeros(mce_matrix.shape[1])
+
     for concept in seed_concept_list:
         if concept in concept2id.keys():
             summed_vec = summed_vec + mce_matrix[concept2id[concept]]
             i_in_dict += 1
-    if i_in_dict > 0: # at least one seed concept in the dict.
+
+    if i_in_dict > 1: # at least one seed concept in the dict.
         summed_vec = normalize_vec(summed_vec)
 
         index_rank = elemwise_cossim(summed_vec, mce_matrix)
@@ -36,5 +38,3 @@ def recommend_concept(seed_concept_list,k,summed_vec,mce_matrix,id2concept,conce
         concept_list =[{'conceptId' : int(concept_id), 'conceptName' : search_concept_name_by_id(int(concept_id))} for concept_id in nn_concepts]
     return concept_list
 
-
-# recommend_concept(201826,20,summed_vec,mce_matrix,id2concept,concept2id)

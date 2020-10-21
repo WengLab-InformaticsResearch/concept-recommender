@@ -19,8 +19,20 @@ def get_recommend_concept():
     concept_list = [str(seed['conceptId']) for seed in request.json['seed_list']]
     methods = request.json['methods']
 
-    k = 20
+    k = 10
     if methods == 'line':
+        recommend_concept_list = recommend_concept(concept_list, k, summed_vec_line, mce_matrix_line, id2concept_line, concept2id_line)
+
+    elif methods == 'node2vec':
+        recommend_concept_list = recommend_concept(concept_list, k, summed_vec_n2v, mce_matrix_n2v, id2concept_n2v, concept2id_n2v)
+
+    elif methods == 'svd':
+        recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
+
+    elif methods == 'glove':
+        recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
+
+    elif methods == 'skipgram':
         recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
     # recommend_concept_list = [
     #     {'conceptId' : 5, 'conceptName' : 'mock concept 5'},
