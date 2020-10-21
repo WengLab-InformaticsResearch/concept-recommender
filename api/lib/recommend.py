@@ -23,7 +23,7 @@ def recommend_concept(seed_concept_list, k, mce_matrix, id2concept, concept2id):
             summed_vec = summed_vec + mce_matrix[concept2id[concept]]
             i_in_dict += 1
 
-    if i_in_dict > 1: # at least one seed concept in the dict.
+    if i_in_dict > 0: # at least one seed concept in the dict.
         summed_vec = normalize_vec(summed_vec)
 
         index_rank = elemwise_cossim(summed_vec, mce_matrix)
