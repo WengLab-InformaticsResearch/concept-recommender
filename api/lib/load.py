@@ -18,8 +18,8 @@ mce_matrix_line = np.load("data/mce_matrix_line.npy")
 concept2id_line = load_data("data/concept2id_line.pkl")
 id2concept_line = build_id2concept(concept2id_line)
 
-mce_matrix_n2v = np.load("data/mce_matrix_n2v.npy")
-concept2id_n2v = load_data("data/concept2id_n2v.pkl")
+mce_matrix_n2v = np.load("data/mce_matrix_node2vec.npy")
+concept2id_n2v = load_data("data/concept2id_node2vec.pkl")
 id2concept_n2v = build_id2concept(concept2id_n2v)
 
 mce_matrix_svd = np.load("data/mce_matrix_svd.npy")

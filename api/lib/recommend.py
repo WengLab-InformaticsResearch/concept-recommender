@@ -1,7 +1,5 @@
 import numpy as np
 from lib.search import search_concept_name_by_id
-from lib.load import mce_matrix_line,concept2id_line,id2concept_line,summed_vec_line
-
 
 def normalize_vec(vec):
     return vec / np.linalg.norm(vec, ord=1)

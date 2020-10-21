@@ -5,7 +5,11 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from lib.search import search_concept
 from lib.recommend import recommend_concept
-from lib.load import mce_matrix_line,concept2id_line,id2concept_line,summed_vec_line
+from lib.load import mce_matrix_line, concept2id_line, id2concept_line
+from lib.load import mce_matrix_n2v, concept2id_n2v, id2concept_n2v
+from lib.load import mce_matrix_svd, concept2id_svd, id2concept_svd
+from lib.load import mce_matrix_glove, concept2id_glove, id2concept_glove
+from lib.load import mce_matrix_skipgram, concept2id_skipgram, id2concept_skipgram
 
 app = Flask(__name__)
 CORS(app)
