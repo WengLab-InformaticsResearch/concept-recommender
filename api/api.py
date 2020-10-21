@@ -21,19 +21,15 @@ def get_recommend_concept():
 
     k = 10
     if methods == 'line':
-        recommend_concept_list = recommend_concept(concept_list, k, summed_vec_line, mce_matrix_line, id2concept_line, concept2id_line)
-
+        recommend_concept_list = recommend_concept(concept_list, k, mce_matrix_line, id2concept_line, concept2id_line)
     elif methods == 'node2vec':
-        recommend_concept_list = recommend_concept(concept_list, k, summed_vec_n2v, mce_matrix_n2v, id2concept_n2v, concept2id_n2v)
-
+        recommend_concept_list = recommend_concept(concept_list, k, mce_matrix_n2v, id2concept_n2v, concept2id_n2v)
     elif methods == 'svd':
-        recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
-
+        recommend_concept_list = recommend_concept(concept_list, k, mce_matrix_svd, id2concept_svd, concept2id_svd)
     elif methods == 'glove':
-        recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
-
+        recommend_concept_list = recommend_concept(concept_list, k, mce_matrix_glove, id2concept_glove, concept2id_glove)
     elif methods == 'skipgram':
-        recommend_concept_list = recommend_concept(concept_list,k,summed_vec_line,mce_matrix_line,id2concept_line,concept2id_line)
+        recommend_concept_list = recommend_concept(concept_list, k, mce_matrix_skipgram, id2concept_skipgram, concept2id_skipgram)
     # recommend_concept_list = [
     #     {'conceptId' : 5, 'conceptName' : 'mock concept 5'},
     #     {'conceptId' : 6, 'conceptName' : 'mock concept 6'},
